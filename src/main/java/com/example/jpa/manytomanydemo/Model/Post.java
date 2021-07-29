@@ -24,7 +24,8 @@ import javax.validation.constraints.Size;
 @Setter
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "id",
+        scope = Post.class)
 public class Post {
 
     @Id
@@ -62,7 +63,7 @@ public class Post {
     @JoinTable(name = "post_tags",
             joinColumns = { @JoinColumn(name = "post_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") })
-    private Set<Tag> tags = new HashSet<Tag>();
+    private Set<Tag> tags = new HashSet<>();
 
     public Post(String title, String description, String content) {
         this.title = title;

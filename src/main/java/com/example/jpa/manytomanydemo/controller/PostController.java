@@ -5,14 +5,12 @@ import com.example.jpa.manytomanydemo.repositories.PostRepository;
 import com.example.jpa.manytomanydemo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/posts")
 public class PostController {
 
     @Autowired
@@ -26,5 +24,16 @@ public class PostController {
     @PostMapping("/create")
     public ResponseEntity<Post> createPost(@RequestBody Post newPost){
         return postService.createNewPost(newPost);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Post> updatePosts(@RequestBody Post updatedPost,@PathVariable Long id){
+        return ResponseEntity.ok(postService.updatePost(updatedPost,id));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePosts(@PathVariable Long id){
+        postService.deletePost(id);
+        return ResponseEntity.ok("deleted successfully");
     }
 }

@@ -21,7 +21,8 @@ import java.util.Set;
 @Table(name = "tags")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "id",
+        scope = Tag.class)
 public class Tag {
 
     @Id
